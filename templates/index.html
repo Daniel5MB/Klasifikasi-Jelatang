@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Klasifikasi Daun Jelatang</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="overlay">
+        <div class="container">
+            <h1>Klasifikasi Daun Jelatang</h1>
+            <form action="/predict" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept="image/*" required>
+                <button type="submit">Klasifikasikan</button>
+            </form>
+
+            {% if prediction %}
+                <div class="result">
+                    <h2>Hasil Prediksi:</h2>
+                    <p><strong>{{ prediction }}</strong> ({{ confidence }}%)</p>
+                </div>
+            {% endif %}
+
+            {% if filename %}
+                <div class="uploaded-image">
+                    <h3>Gambar yang Diunggah:</h3>
+                    <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Gambar Daun" style="max-width: 300px; border-radius: 8px;">
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
